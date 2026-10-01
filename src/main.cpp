@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include "zygisk.hpp"
 #include "il2cpp_api.hpp"
-#include "dobby.h"
+#include "hook.hpp"
 
 #define TAG   "ZygiskVRC"
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO,  TAG, __VA_ARGS__)
@@ -225,7 +225,7 @@ static void *setup_thread(void *) {
     void *target = reinterpret_cast<Il2CppMethodInternal *>(g_ctx.img_set_color)->methodPointer;
     if (!target) { LOGE("set_color methodPointer null"); return nullptr; }
 
-    DobbyHook(target, (void *)hook_image_set_color, (void **)&orig_image_set_color);
+    hook_func(target, (void *)hook_image_set_color, (void **)reinterpret_cast<void**>(&orig_image_set_color));
     g_ctx.ready = true;
     LOGI("Hook installed @ %p — launchpad class %s",
          target, g_ctx.launchpad_class ? "found" : "NOT found (name fallback active)");
