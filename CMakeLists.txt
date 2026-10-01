@@ -10,7 +10,7 @@ include(FetchContent)
 FetchContent_Declare(
     dobby
     GIT_REPOSITORY https://github.com/jmpews/Dobby.git
-    GIT_TAG        main
+    GIT_TAG        master
     GIT_SHALLOW    TRUE
 )
 set(DOBBY_BUILD_EXAMPLE OFF CACHE BOOL "" FORCE)
