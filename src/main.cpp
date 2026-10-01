@@ -76,7 +76,7 @@ static bool is_launchpad_image(void *img) {
     auto *transform = g_api.invoke0(g_ctx.go_get_transform, go);
 
     for (int depth = 0; depth < 10 && transform; depth++) {
-        auto *tgo = g_api.invoke0(g_ctx.tr_get_go, transform);
+        auto *tgo = g_api.invoke0(g_ctx.img_get_go, transform);
         if (!tgo) break;
 
         if (g_ctx.launchpad_class) {
@@ -190,7 +190,6 @@ static void *setup_thread(void *) {
     g_ctx.go_get_transform = g_api.class_get_method_from_name(g_ctx.gameobject_class, "get_transform",  0);
     g_ctx.go_get_name      = g_api.class_get_method_from_name(g_ctx.gameobject_class, "get_name",       0);
     g_ctx.tr_get_parent    = g_api.class_get_method_from_name(g_ctx.transform_class,  "get_parent",     0);
-    g_ctx.tr_get_go        = g_ctx.img_get_go;
 
     if (!g_ctx.img_set_color || !g_ctx.img_get_go ||
         !g_ctx.go_get_transform || !g_ctx.tr_get_parent || !g_ctx.go_get_name) {
