@@ -1,0 +1,6 @@
+id=zygisk-vrchat-test
+name=Zygisk VRChat Test
+version=v0.1
+versionCode=1
+author=Raposa
+description=Zygisk test hook for VRChat (com.vrchat.mobile.standalone)
